@@ -35,6 +35,6 @@ Este sistema tiene como objetivo *automatizar la lectura de esos documentos, **e
 - *Frontend:* React + Vite
 - *Backend:* Node.js + Express
 - *Base de datos:* MongoDB
-- *Otros:* Librerías para parsing de PDF y visualización de grafos
+- *Otros:* API Vertex de google para extracción de datos y librerias para visualización de grafos
 
 ---
