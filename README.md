@@ -3,7 +3,7 @@
 ## 📄 Descripción
 
 Cada día se publican nuevos PDFs en el "Diario Oficial" con información sobre empresas creadas en Chile.  
-Este sistema tiene como objetivo *automatizar la lectura de esos documentos, **extraer la información relevante* y *estructurarla para su consulta* mediante una interfaz web.
+Este sistema tiene como objetivo *automatizar la lectura de esos documentos* *extraer la información relevante* y *estructurarla para su consulta* mediante una interfaz web.
 
 ## 🚀 Funcionalidades
 
