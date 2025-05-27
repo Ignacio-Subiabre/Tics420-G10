@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import RegisterModal from './RegisterModal';
 
-function LoginForm({ onLogin }) {
+export default function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showRegister, setShowRegister] = useState(false);
@@ -11,7 +11,8 @@ function LoginForm({ onLogin }) {
     e.preventDefault();
 
     if (!email.includes('@')) return alert('El correo debe contener un @');
-    if (password.length < 6) return alert('La contraseña debe tener al menos 6 caracteres');
+    if (password.length < 6)
+      return alert('La contraseña debe tener al menos 6 caracteres');
 
     try {
       setLoading(true);
@@ -40,25 +41,27 @@ function LoginForm({ onLogin }) {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 z-50">
-        <div className="border-8 border-gray-200 border-t-blue-500 rounded-full w-16 h-16 animate-spin mb-4"></div>
-        <p className="text-lg text-gray-600">Iniciando sesión...</p>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-50 p-4">
+        <div className="w-16 h-16 border-8 border-gray-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+        <p className="text-lg font-medium text-white">Iniciando sesión...</p>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="fixed inset-0 bg-indigo-300 bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center text-indigo-700 mb-6">
+          Bienvenido de nuevo
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
           <input
             type="email"
             placeholder="Correo electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
           />
           <input
             type="password"
@@ -67,21 +70,21 @@ function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
           />
-          <div className="flex justify-between items-center">
+          <div className="flex gap-4">
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-indigo-400 rounded-lg transition"
+              className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-indigo-600 font-semibold rounded-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              Login
+              Iniciar sesión
             </button>
             <button
               type="button"
               onClick={() => setShowRegister(true)}
-              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-indigo-400 rounded-lg transition"
+              className="flex-1 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold rounded-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-indigo-300"
             >
-              Register
+              Registrarse
             </button>
           </div>
         </form>
@@ -91,5 +94,3 @@ function LoginForm({ onLogin }) {
     </div>
   );
 }
-
-export default LoginForm;
