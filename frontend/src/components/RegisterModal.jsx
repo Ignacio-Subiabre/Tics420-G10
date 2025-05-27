@@ -21,7 +21,7 @@ function RegisterModal({ onClose }) {
 
       if (res.ok) {
         alert('✅ Usuario registrado correctamente');
-        onClose(); // cerrar el modal
+        onClose();
       } else {
         alert(data.error || 'Error al registrar');
       }
@@ -31,35 +31,17 @@ function RegisterModal({ onClose }) {
   };
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0, left: 0,
-      width: '100vw',
-      height: '100vh',
-      backgroundColor: 'rgba(0,0,0,0.4)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 1000
-    }}>
-      <div style={{
-        background: 'white',
-        padding: '2rem',
-        borderRadius: '10px',
-        boxShadow: '0 0 15px rgba(0,0,0,0.2)',
-        width: '100%',
-        maxWidth: '350px',
-        textAlign: 'center'
-      }}>
-        <h2 style={{ marginBottom: '1rem' }}>Registro</h2>
-        <form onSubmit={handleRegister}>
+    <div className="fixed inset-0 bg-gray-100 bg-opacity-40 flex items-center justify-center z-50">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm text-center">
+        <h2 className="text-2xl font-semibold mb-6">Registro</h2>
+        <form onSubmit={handleRegister} className="space-y-4">
           <input
             type="email"
             placeholder="Correo electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: '100%', marginBottom: '1rem', padding: '0.5rem' }}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <input
             type="password"
@@ -68,11 +50,22 @@ function RegisterModal({ onClose }) {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            style={{ width: '100%', marginBottom: '1.5rem', padding: '0.5rem' }}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <button type="submit" style={{ padding: '0.5rem 1rem' }}>Registrar</button>
-            <button type="button" onClick={onClose} style={{ padding: '0.5rem 1rem' }}>Cancelar</button>
+          <div className="flex justify-between">
+            <button
+              type="submit"
+              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-indigo-400 rounded-lg transition"
+            >
+              Registrar
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2 bg-red-400 hover:bg-red-500 text-indigo-400 rounded-lg transition"
+            >
+              Cancelar
+            </button>
           </div>
         </form>
       </div>

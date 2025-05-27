@@ -5,7 +5,7 @@ function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showRegister, setShowRegister] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,28 +14,24 @@ function LoginForm({ onLogin }) {
     if (password.length < 6) return alert('La contraseña debe tener al menos 6 caracteres');
 
     try {
-      setLoading(true); // ✅ Start showing spinner
+      setLoading(true);
 
       const res = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await res.json();
 
-      // Simulate loading for at least 3 seconds
       setTimeout(() => {
         setLoading(false);
-
         if (res.ok) {
           localStorage.setItem('token', data.token);
           onLogin();
         } else {
           alert(data.error || 'Error al iniciar sesión');
         }
-      }, 3000); // 3000 miliseconds
-
+      }, 3000);
     } catch (error) {
       setLoading(false);
       alert('Error al conectar con el servidor');
@@ -43,70 +39,26 @@ function LoginForm({ onLogin }) {
   };
 
   if (loading) {
-    // ✅ Spinner view during loading
     return (
-      <div style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f9f9f9',
-      }}>
-        <div style={{
-          border: '8px solid #f3f3f3',
-          borderTop: '8px solid #3498db',
-          borderRadius: '50%',
-          width: '60px',
-          height: '60px',
-          animation: 'spin 1s linear infinite',
-          marginBottom: '1rem'
-        }} />
-        <p style={{ fontSize: '1.2rem', color: '#555' }}>Iniciando sesión...</p>
-
-        <style>
-          {`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}
-        </style>
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 z-50">
+        <div className="border-8 border-gray-200 border-t-blue-500 rounded-full w-16 h-16 animate-spin mb-4"></div>
+        <p className="text-lg text-gray-600">Iniciando sesión...</p>
       </div>
     );
   }
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100vw',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      background: '#f2f2f2',
-      zIndex: 1
-    }}>
-      <div style={{
-        background: 'white',
-        padding: '2rem',
-        borderRadius: '10px',
-        boxShadow: '0 0 15px rgba(0,0,0,0.1)',
-        width: '100%',
-        maxWidth: '350px'
-      }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Login</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
             placeholder="Correo electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: '100%', marginBottom: '1rem', padding: '0.5rem' }}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <input
             type="password"
@@ -115,19 +67,26 @@ function LoginForm({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            style={{ width: '100%', marginBottom: '1.5rem', padding: '0.5rem' }}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <button type="submit" style={{ padding: '0.5rem 1rem' }}>Login</button>
-            <button type="button" onClick={() => setShowRegister(true)} style={{ padding: '0.5rem 1rem' }}>
+          <div className="flex justify-between items-center">
+            <button
+              type="submit"
+              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-indigo-400 rounded-lg transition"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowRegister(true)}
+              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-indigo-400 rounded-lg transition"
+            >
               Register
             </button>
           </div>
         </form>
 
-        {showRegister && (
-          <RegisterModal onClose={() => setShowRegister(false)} />
-        )}
+        {showRegister && <RegisterModal onClose={() => setShowRegister(false)} />}
       </div>
     </div>
   );
