@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +69,27 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* 🎨 Design System Additions */
+
+/* Base text styling using Tailwind utilities */
+body {
+  @apply bg-base text-dark font-sans leading-relaxed;
+}
+
+h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-2xl font-semibold mb-2;
+}
+
+p {
+  @apply text-base mb-4;
+}
+
+a {
+  @apply underline hover:text-gray-500;
 }
