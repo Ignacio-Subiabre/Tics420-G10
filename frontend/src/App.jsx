@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import CompaniesList from "./components/CompaniesList";
 import LoginForm from "./components/LoginForm";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import './App.css';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
   };
 
   return (
+      <>
+        <Header /> 
     <div className="app-container">
       <h1 className="title">Company Processor</h1>
       {isLoggedIn ? (
@@ -28,6 +32,9 @@ function App() {
         <LoginForm onLogin={handleLogin} />
       )}
     </div>
+
+    <Footer />
+  </>
   );
 }
 
