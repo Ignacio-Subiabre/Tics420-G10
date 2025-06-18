@@ -1,19 +1,23 @@
 import { useState } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi'; 
+import { HiMenu, HiX } from 'react-icons/hi';
+import { Link } from 'react-router-dom'; 
 // Si no tienes react-icons: npm install react-icons
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  
+  // Solo las páginas necesarias
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'Nosotros' },
-    { href: '/contacto', label: 'Contacto' },
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'Nosotros' },
   ];
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
       {/* Logo */}
-      <div className="text-2xl font-bold">MiLogo</div>
+      <div className="flex items-center gap-2 text-purple-600 text-2xl font-extrabold">
+        <span>EmpresasDB</span>
+      </div>
 
       {/* Botón hamburguesa en móvil */}
       <button
@@ -21,7 +25,7 @@ export default function Header() {
         onClick={() => setOpen(!open)}
         aria-label="Toggle menu"
       >
-        {open ? <HiX className="w-6 h-6"/> : <HiMenu className="w-6 h-6"/>}
+        {open ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
       </button>
 
       {/* Navegación */}
@@ -33,14 +37,14 @@ export default function Header() {
       `}>
         <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
           {navLinks.map(link => (
-            <li key={link.href} className="mb-2 md:mb-0">
-              <a
-                href={link.href}
+            <li key={link.to} className="mb-2 md:mb-0">
+              <Link
+                to={link.to}
                 className="block px-2 py-1 rounded hover:bg-indigo-100"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -48,6 +52,3 @@ export default function Header() {
     </header>
   );
 }
-
-
-
