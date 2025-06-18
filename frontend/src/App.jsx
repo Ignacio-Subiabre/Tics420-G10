@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import CompaniesList from "./components/CompaniesList";
 import LoginForm from "./components/LoginForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Carousel from "./components/Carousel"; // ✅ nuevo import
+import Faq from "./components/Faq";           // ✅ nuevo import
+
 import './App.css';
 
 function App() {
@@ -30,6 +34,8 @@ function App() {
               <>
                 <button onClick={handleLogout} className="logout-button">Logout</button>
                 <CompaniesList />
+                <Carousel /> {/* ✅ muestra el carrusel debajo de la tabla */}
+                <Faq />      {/* ✅ muestra el FAQ también */}
               </>
             ) : (
               <LoginForm onLogin={handleLogin} />
