@@ -5,7 +5,7 @@ export default function Footer() {
         <a href="/politicas" className="hover:underline mx-2">Políticas</a>·
         <a href="/terminos" className="hover:underline mx-2">Términos</a>
       </div>
-      <div>© {new Date().getFullYear()} Tu Proyecto · Todos los derechos reservados</div>
+      <div>© {new Date().getFullYear()} EmpresasDB · Todos los derechos reservados</div>
     </footer>
   );
 }

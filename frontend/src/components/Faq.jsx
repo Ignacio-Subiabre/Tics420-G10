@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     pregunta: "¿Los datos son oficiales?",
-    respuesta: "Sí, provienen del Diario Oficial y otras fuentes públicas verificadas."
+    respuesta: "Sí, todos los datos provienen del Diario Oficial."
   }
 ];
 
