@@ -1,10 +1,11 @@
 export default function Footer() {
-    return (
-      <footer className="bg-gray-100 py-4 mt-auto">
-        <div className="text-center text-sm text-gray-500">
-          © 2025 Tu Empresa. Todos los derechos reservados.
-        </div>
-      </footer>
-    );
-  }
-  
+  return (
+    <footer className="mt-12 py-6 bg-indigo-300 text-center text-sm text-gray-600">
+      <div className="mb-2">
+        <a href="/politicas" className="hover:underline mx-2">Políticas</a>·
+        <a href="/terminos" className="hover:underline mx-2">Términos</a>
+      </div>
+      <div>© {new Date().getFullYear()} EmpresasDB · Todos los derechos reservados</div>
+    </footer>
+  );
+}
