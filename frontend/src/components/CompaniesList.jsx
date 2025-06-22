@@ -45,6 +45,13 @@ function CompaniesList() {
     );
   });
 
+  const handleDownload = (type) => {
+    const endpoint = type === 'csv'
+      ? 'http://localhost:3001/api/companies/download/csv'
+      : 'http://localhost:3001/api/companies/download/json';
+    window.open(endpoint, '_blank');
+  };
+
   return (
     <div>
       <input
@@ -54,6 +61,15 @@ function CompaniesList() {
         onChange={(e) => setFiltro(e.target.value)}
         style={{ width: '100%', padding: '8px', marginBottom: '1rem' }}
       />
+
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+        <button onClick={() => handleDownload('csv')} style={{ padding: '8px 12px', backgroundColor: '#4F46E5', color: 'white', border: 'none', borderRadius: '4px' }}>
+          Descargar CSV
+        </button>
+        <button onClick={() => handleDownload('json')} style={{ padding: '8px 12px', backgroundColor: '#4F46E5', color: 'white', border: 'none', borderRadius: '4px' }}>
+          Descargar JSON
+        </button>
+      </div>
 
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
