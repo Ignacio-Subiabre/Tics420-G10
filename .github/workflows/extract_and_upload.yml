@@ -1,0 +1,24 @@
+name: Ejecutar extract_and_upload.js diariamente
+
+on:
+  schedule:
+    - cron: '30 16 * * *'  # 12:30 Chile = 16:30 UTC
+  workflow_dispatch:
+
+jobs:
+  run-extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar dependencias
+        run: |
+          cd backend
+          npm install
+
+      - name: Ejecutar script extract_and_upload.js
+        run: |
+          cd backend
+          node models/extract_and_upload.js

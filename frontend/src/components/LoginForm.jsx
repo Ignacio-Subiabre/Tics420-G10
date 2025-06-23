@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import RegisterModal from './RegisterModal';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ export default function LoginForm({ onLogin }) {
     try {
       setLoading(true);
 
-      const res = await fetch('http://localhost:3001/api/auth/login', {
+      const res = await fetch(`${backendUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

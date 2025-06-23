@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function ObjetoModal({ objeto, onClose }) {
   return (
@@ -28,7 +29,7 @@ function CompaniesList() {
   const [modalObjeto, setModalObjeto] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/companies')
+    fetch(`${backendUrl}/api/companies`)
       .then(res => res.json())
       .then(data => {
         console.log("✅ Datos recibidos:", data);
@@ -47,8 +48,8 @@ function CompaniesList() {
 
   const handleDownload = (type) => {
     const endpoint = type === 'csv'
-      ? 'http://localhost:3001/api/companies/download/csv'
-      : 'http://localhost:3001/api/companies/download/json';
+      ? `${backendUrl}/companies/download/csv`
+      : `${backendUrl}/api/companies/download/json`;
     window.open(endpoint, '_blank');
   };
 

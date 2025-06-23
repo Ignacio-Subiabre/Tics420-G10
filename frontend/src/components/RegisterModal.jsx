@@ -1,4 +1,5 @@
 import { useState } from 'react';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function RegisterModal({ onClose }) {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ function RegisterModal({ onClose }) {
     if (password.length < 6) return alert('Contraseña debe tener al menos 6 caracteres');
 
     try {
-      const res = await fetch('http://localhost:3001/api/auth/register', {
+      const res = await fetch(`${backendUrl}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

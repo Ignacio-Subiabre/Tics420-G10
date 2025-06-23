@@ -1,6 +1,7 @@
 # === FRONTEND (React con Vite) ===
 frontend/node_modules/
 frontend/dist/
+frontend/.env
 
 # === BACKEND (Node.js) ===
 backend/node_modules/
