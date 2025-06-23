@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="app-container">
+      <div className="min-h-screen bg-gray-100 text-gray-900 px-4 py-8 w-full overflow-x-auto">
         <h1 className="title">Company Processor</h1>
 
         <Routes>

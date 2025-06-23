@@ -2,27 +2,22 @@ import { useEffect, useState } from 'react';
 
 function ObjetoModal({ objeto, onClose }) {
   return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-      backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      zIndex: 1000
-    }}>
-      <div style={{
-        backgroundColor: 'white', padding: '1.5rem', maxWidth: '600px', borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0,0,0,0.5)', maxHeight: '80%', overflowY: 'auto'
-      }}>
-        <h3>Objeto</h3>
-        <p style={{ whiteSpace: 'pre-line' }}>{objeto}</p>
-        <button onClick={onClose} style={{
-          marginTop: '1rem', padding: '6px 12px', backgroundColor: '#333', color: 'white',
-          border: 'none', borderRadius: '4px', cursor: 'pointer'
-        }}>Cerrar</button>
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+      <div className="bg-white p-6 max-w-lg w-full rounded-lg shadow-lg max-h-[80vh] overflow-y-auto">
+        <h3 className="text-lg font-bold mb-4">Objeto</h3>
+        <p className="whitespace-pre-line text-gray-800">{objeto}</p>
+        <button
+          onClick={onClose}
+          className="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700"
+        >
+          Cerrar
+        </button>
       </div>
     </div>
   );
 }
 
-function CompaniesList() {
+export default function CompaniesList() {
   const [empresas, setEmpresas] = useState([]);
   const [filtro, setFiltro] = useState('');
   const [modalObjeto, setModalObjeto] = useState(null);
@@ -31,7 +26,7 @@ function CompaniesList() {
     fetch('http://localhost:3001/api/companies')
       .then(res => res.json())
       .then(data => {
-        console.log("✅ Datos recibidos:", data);
+        console.log('✅ Datos recibidos:', data);
         setEmpresas(data);
       })
       .catch(err => console.error('❌ Error al cargar empresas:', err));
@@ -53,60 +48,65 @@ function CompaniesList() {
   };
 
   return (
-    <div>
+    <div className="p-4 space-y-4 w-full max-w-full overflow-x-hidden">
       <input
         type="text"
         placeholder="Buscar por RUT o Razón Social..."
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
-        style={{ width: '100%', padding: '8px', marginBottom: '1rem' }}
+        className="w-full p-2 border border-gray-300 rounded"
       />
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        <button onClick={() => handleDownload('csv')} style={{ padding: '8px 12px', backgroundColor: '#4F46E5', color: 'white', border: 'none', borderRadius: '4px' }}>
+      <div className="flex flex-wrap gap-2">
+        <button
+          onClick={() => handleDownload('csv')}
+          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+        >
           Descargar CSV
         </button>
-        <button onClick={() => handleDownload('json')} style={{ padding: '8px 12px', backgroundColor: '#4F46E5', color: 'white', border: 'none', borderRadius: '4px' }}>
+        <button
+          onClick={() => handleDownload('json')}
+          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+        >
           Descargar JSON
         </button>
       </div>
 
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ backgroundColor: '#222', color: 'white' }}>
-            <th>RUT</th>
-            <th>Razón Social</th>
-            <th>Tipo de Evento</th>
-            <th>Archivo</th>
-            <th>Capital</th>
-            <th>Objeto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {empresasFiltradas.map((empresa, index) => (
-            <tr key={index} style={{ borderBottom: '1px solid #ddd' }}>
-              <td>{empresa.rut || '—'}</td>
-              <td>{empresa.razon_social || '—'}</td>
-              <td>{empresa.tipo_evento || '—'}</td>
-              <td>{empresa.archivo || '—'}</td>
-              <td>{empresa.capital || '—'}</td>
-              <td>
-                {empresa.objeto ? (
-                  <button
-                    onClick={() => setModalObjeto(empresa.objeto)}
-                    style={{
-                      backgroundColor: '#333', color: 'white', border: 'none',
-                      padding: '4px 8px', borderRadius: '4px', cursor: 'pointer'
-                    }}
-                  >
-                    Ver
-                  </button>
-                ) : '—'}
-              </td>
+      <div className="overflow-x-auto w-full">
+        <table className="w-full border-collapse text-sm">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="p-2 text-left">RUT</th>
+              <th className="p-2 text-left">Razón Social</th>
+              <th className="p-2 text-left">Tipo de Evento</th>
+              <th className="p-2 text-left">Archivo</th>
+              <th className="p-2 text-left">Capital</th>
+              <th className="p-2 text-left">Objeto</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {empresasFiltradas.map((empresa, index) => (
+              <tr key={index} className="border-b">
+                <td className="p-2 break-words">{empresa.rut || '—'}</td>
+                <td className="p-2 break-words">{empresa.razon_social || '—'}</td>
+                <td className="p-2 break-words">{empresa.tipo_evento || '—'}</td>
+                <td className="p-2 break-words">{empresa.archivo || '—'}</td>
+                <td className="p-2 break-words">{empresa.capital || '—'}</td>
+                <td className="p-2">
+                  {empresa.objeto ? (
+                    <button
+                      onClick={() => setModalObjeto(empresa.objeto)}
+                      className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
+                    >
+                      Ver
+                    </button>
+                  ) : '—'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {modalObjeto && (
         <ObjetoModal objeto={modalObjeto} onClose={() => setModalObjeto(null)} />
@@ -114,5 +114,3 @@ function CompaniesList() {
     </div>
   );
 }
-
-export default CompaniesList;
