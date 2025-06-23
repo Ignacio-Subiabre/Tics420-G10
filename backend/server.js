@@ -1,3 +1,7 @@
+import cors from 'cors';
+app.use(cors({
+  origin: 'https://orange-river-0cca73f0f.1.azurestaticapps.net'
+}));
 const express = require('express');
 const app = express();
 const db = require('./models/db'); // conecta a MongoDB
