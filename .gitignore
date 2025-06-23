@@ -28,5 +28,5 @@ Thumbs.db
 
 # === Carpetas comunes de salida ===
 logs/
-dist/
+#dist/
 dist-ssr/
