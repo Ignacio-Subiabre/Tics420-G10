@@ -7,13 +7,20 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // Configuración de CORS
+
+const allowedOrigins = ['https://orange-river-0cca73f0f.1.azurestaticapps.net'];
+
 app.use(cors({
-  origin: '*', // Puedes restringir esto más adelante
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
   credentials: true
 }));
 
-// Middleware
 app.use(express.json());
 
 // Rutas
@@ -23,5 +30,5 @@ app.use('/api/auth', authRoutes);
 // Puerto dinámico para funcionar en Azure
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(🚀 Servidor corriendo en el puerto: ${PORT});
+  console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
 });
