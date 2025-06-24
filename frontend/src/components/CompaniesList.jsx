@@ -48,7 +48,7 @@ function CompaniesList() {
 
   const handleDownload = (type) => {
     const endpoint = type === 'csv'
-      ? `${backendUrl}/companies/download/csv`
+      ? `${backendUrl}/api/companies/download/csv`
       : `${backendUrl}/api/companies/download/json`;
     window.open(endpoint, '_blank');
   };
