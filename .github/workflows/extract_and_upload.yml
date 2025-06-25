@@ -13,12 +13,17 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v3
 
+      - name: Crear archivo de credenciales desde secreto
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > backend/vertex-key.json
+
+      - name: Establecer GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=./vertex-key.json" >> $GITHUB_ENV
+        working-directory: backend
+
       - name: Instalar dependencias
-        run: |
-          cd backend
-          npm install
+        run: npm install
+        working-directory: backend
 
       - name: Ejecutar script extract_and_upload.js
-        run: |
-          cd backend
-          node models/extract_and_upload.js
+        run: node models/extract_and_upload.js
+        working-directory: backend
