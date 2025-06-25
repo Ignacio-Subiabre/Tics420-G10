@@ -1,12 +1,12 @@
-name: Ejecutar extract_and_upload.js diariamente
+name: Ejecutar descarga y extracción diaria
 
 on:
   schedule:
-    - cron: '30 16 * * *'  # 12:30 Chile = 16:30 UTC
+    - cron: '0 16 * * *'  # 12:00 Chile (UTC-4)
   workflow_dispatch:
 
 jobs:
-  run-extract:
+  run-all:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,10 @@ jobs:
 
       - name: Instalar dependencias
         run: npm install
+        working-directory: backend
+
+      - name: Ejecutar script download_pdf.js
+        run: node models/download_pdf.js
         working-directory: backend
 
       - name: Ejecutar script extract_and_upload.js
