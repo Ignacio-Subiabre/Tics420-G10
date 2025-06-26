@@ -20,6 +20,12 @@ jobs:
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=./vertex-key.json" >> $GITHUB_ENV
         working-directory: backend
 
+      - name: Crear archivo .env
+        run: |
+          echo "PROJECT_ID=tics420" >> backend/.env
+          echo "PROCESSOR_ID=141f4f8c47ae095a" >> backend/.env
+          echo "LOCATION=us" >> backend/.env
+
       - name: Instalar dependencias
         run: |
           npm install
