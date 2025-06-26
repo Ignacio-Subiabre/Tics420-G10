@@ -31,4 +31,13 @@ describe('filtrarEmpresas', () => {
   const resultado = filtrarEmpresas(datos, 'sociedad');
   expect(resultado).toEqual([{ rut: '55555555-5', razonSocial: 'Otra Sociedad' }]);
   });
+  
+  it('devuelve múltiples coincidencias si aplica para más de una empresa', () => {
+    const resultado = filtrarEmpresas(datos, 'Empresa');
+    expect(resultado).toEqual([
+      { rut: '12345678-9', razonSocial: 'Empresa Uno' },
+      { rut: '98765432-1', razonSocial: 'Empresa Dos' }
+    ]);
+  });
+
 });
