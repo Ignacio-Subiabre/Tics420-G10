@@ -13,15 +13,17 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v3
 
-      - name: Crear archivo de credenciales desde secreto
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > backend/vertex-key.json
+      - name: Crear archivo de credenciales desde secreto base64
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | base64 --decode > backend/vertex-key.json
 
       - name: Establecer GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=./vertex-key.json" >> $GITHUB_ENV
         working-directory: backend
 
       - name: Instalar dependencias
-        run: npm install
+        run: |
+          npm install
+          npm install @google-cloud/documentai
         working-directory: backend
 
       - name: Ejecutar script download_pdf.js
