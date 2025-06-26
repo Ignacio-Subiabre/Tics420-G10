@@ -26,4 +26,9 @@ describe('filtrarEmpresas', () => {
     const resultado = filtrarEmpresas(datos, 'sin coincidencias');
     expect(resultado).toHaveLength(0);
   });
+  
+  it('filtra correctamente por parte del nombre sin importar mayúsculas', () => {
+  const resultado = filtrarEmpresas(datos, 'sociedad');
+  expect(resultado).toEqual([{ rut: '55555555-5', razonSocial: 'Otra Sociedad' }]);
+  });
 });
