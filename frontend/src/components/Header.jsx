@@ -26,12 +26,12 @@ export default function Header() {
         {open ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
       </button>
 
-      {/* Navegación */}
+      {/* Menú de navegación */}
       <nav
         className={`
-          ${open ? 'absolute translate-y-0' : 'absolute -translate-y-full'}
-          top-full left-0 w-full bg-white shadow-md transition-transform duration-300 ease-in-out z-50
-          md:static md:translate-y-0 md:shadow-none md:w-auto
+          ${open ? 'block' : 'hidden'}
+          absolute top-full left-0 w-full bg-white shadow-md z-50
+          md:static md:block md:w-auto md:shadow-none
         `}
       >
         <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
